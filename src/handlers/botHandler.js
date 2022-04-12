@@ -1,6 +1,9 @@
 const { Template } = require('adaptivecards-templating');
+const submitCardTemplate = require('../adaptiveCards/submitCard.json');
 
-const updateButtonCardTemplate = require('../adaptiveCards/updateButtonCard.json');
+const { testModel } = require('../models/testModel');
+
+const testId = 'testId';
 
 const botHandler = async event => {
     try {
@@ -17,10 +20,19 @@ const botHandler = async event => {
                         await messageBot.sendMessage(group.id, { text: 'hello' });
                         break;
                     case 'card':
-                        const template = new Template(updateButtonCardTemplate);
+                        let testData = await testModel.findByPk(testId);
+                        if (!testData) {
+                            testData = await testModel.create({
+                                id: testId,
+                                name: 'Test Name'
+                            })
+                        }
+                        const template = new Template(submitCardTemplate);
                         const cardData = {
                             botId: messageBot.id,
-                            groupId: group.id
+                            groupId: group.id,
+                            testId,
+                            testName: testData.name
                         }
                         const card = template.expand({
                             $root: cardData

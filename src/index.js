@@ -1,5 +1,6 @@
 const { extendApp } = require('ringcentral-chatbot-core');
 const { botHandler } = require('./handlers/botHandler');
+const { testModel } = require('./models/testModel');
 
 const { cardHandler } = require('./handlers/cardHandler');
 
@@ -10,6 +11,7 @@ exports.appExtend = (app) => {
         adminRoute: '/admin', // optional
         botRoute: '/bot', // optional
         models: { // optional
+            testModel
         }
     }
 
