@@ -16,7 +16,7 @@ exports.appExtend = (app) => {
     extendApp(app, skills, botHandler, botConfig);
 
     if (process.env.NODE_ENV !== 'test') {
-        app.listen(process.env.RINGCENTRAL_CHATBOT_EXPRESS_PORT);
+        app.listen(process.env.PORT || process.env.RINGCENTRAL_CHATBOT_EXPRESS_PORT);
     }
 
     console.log('server running...');
