@@ -11,7 +11,7 @@
         {
             "type": "Input.Text",
             "placeholder": "Input a new name...",
-            "id": "name"
+            "id": "testName"
         },
         {
             "type": "ActionSet",
