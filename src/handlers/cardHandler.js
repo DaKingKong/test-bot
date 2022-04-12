@@ -12,13 +12,17 @@ const cardHandler = async req => {
     if (bot) {
         switch (submitData.actionType) {
             case 'update':
-                const testData = await testModel.findByPk(submitData.testId);
-                testData.testName = submitData.testName;
-                await testData.save();
+                const updatedDataModel = await testModel.update({
+                    name: submitData.testName
+                }, {
+                    where: {
+                        id: submitData.testId
+                    }
+                });
                 const template = new Template(textCardTemplate);
                 const cardData = {
                     title: 'Name Updated',
-                    text: `Name has been updated to ${testData.testName}.`
+                    text: `Name has been updated to ${updatedDataModel.name}.`
                 };
                 const card = template.expand({
                     $root: cardData
