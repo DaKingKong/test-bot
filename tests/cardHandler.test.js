@@ -1,6 +1,7 @@
 const request = require('supertest');
 const { server } = require('../src/server');
 const { default: Bot } = require('ringcentral-chatbot-core/dist/models/Bot');
+const { TestModel } = require('../src/models/testModel');
 const nock = require('nock');
 
 
@@ -9,6 +10,8 @@ const accessToken = 'accessToken';
 const botId = 'botId';
 const rcUserId = 'rcUserId';
 const cardId = 'cardId';
+const testId = 'testId';
+const testName = 'testName';
 
 beforeAll(async () => {
     await Bot.create({
@@ -17,12 +20,21 @@ beforeAll(async () => {
             access_token: accessToken
         }
     })
+    await TestModel.create({
+        id: testId,
+        name: testName
+    })
 });
 
 afterAll(async () => {
     await Bot.destroy({
         where: {
             id: botId
+        }
+    });
+    await TestModel.destroy({
+        where: {
+            id: testId
         }
     });
 })
@@ -59,7 +71,9 @@ describe('cardHandler', () => {
             const postData = {
                 data: {
                     botId,
-                    actionType: 'update'
+                    actionType: 'update',
+                    testId,
+                    testName: 'new name'
                 },
                 user: {
                     extId: rcUserId
@@ -82,7 +96,10 @@ describe('cardHandler', () => {
             expect(res.status).toEqual(200);
 
             expect(requestBody.type).toBe('AdaptiveCard');
-            expect(requestBody.body[0].text).toBe('Updated');
+            expect(requestBody.body[0].text).toBe('Name Updated');
+
+            const updatedTestModel = await TestModel.findByPk(testId);
+            expect(updatedTestModel.name).toBe('new name');
 
             // Clean up
             updatedCardScope.done();

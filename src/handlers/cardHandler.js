@@ -2,7 +2,7 @@ const Bot = require('ringcentral-chatbot-core/dist/models/Bot').default;
 const { Template } = require('adaptivecards-templating');
 const textCardTemplate = require('../adaptiveCards/textCard.json');
 
-const { testModel } = require('../models/testModel');
+const { TestModel } = require('../models/testModel');
 
 const cardHandler = async req => {
     const submitData = req.body.data;
@@ -12,7 +12,7 @@ const cardHandler = async req => {
     if (bot) {
         switch (submitData.actionType) {
             case 'update':
-                await testModel.update({
+                await TestModel.update({
                     name: submitData.testName
                 }, {
                     where: {
@@ -22,7 +22,7 @@ const cardHandler = async req => {
                 const template = new Template(textCardTemplate);
                 const cardData = {
                     title: 'Name Updated',
-                    text: `Name has been updated to ${submitData.testName}.`
+                    text: `Name has been updated to **${submitData.testName}**.`
                 };
                 const card = template.expand({
                     $root: cardData
