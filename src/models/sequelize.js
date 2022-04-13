@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(process.env.RINGCENTRAL_CHATBOT_DATABASE_CONNECTION_URI,
   {
@@ -8,8 +8,7 @@ const sequelize = new Sequelize(process.env.RINGCENTRAL_CHATBOT_DATABASE_CONNECT
       ssl: {
         rejectUnauthorized: false
       }
-    },
-    logging: false
+    }
   }
 );
 

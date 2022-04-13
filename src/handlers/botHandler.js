@@ -1,6 +1,5 @@
 const { Template } = require('adaptivecards-templating');
 const submitCardTemplate = require('../adaptiveCards/submitCard.json');
-
 const { TestModel } = require('../models/testModel');
 
 const testId = 'testId';

@@ -38,6 +38,6 @@ exports.appExtend = (app) => {
             res.send('Error');
         }
     });
-
     console.log(`card interactive message uri: ${process.env.RINGCENTRAL_CHATBOT_SERVER}${cardRoute}`);
+
 }
