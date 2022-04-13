@@ -1,11 +1,11 @@
 {
-    "name": "bot3",
+    "name": "bot1",
     "version": "0.0.1",
     "description": "RingCentral Bot Add-In",
     "keywords": [
-        "RingCentral",
-        "Add-In",
-        "Bot"
+      "RingCentral",
+      "Add-In",
+      "Bot"
     ],
     "main": "index.js",
     "scripts": {
@@ -15,9 +15,8 @@
         "test": "set NODE_ENV=test&&jest --forceExit -i"
     },
     "dependencies": {
-        "pg": "^8.7.3",
-        "adaptive-expressions": "^4.14.1",
-        "adaptivecards-templating": "^2.2.0",
+        "pg": "^8.7.3", 
+        
         "glip-integration-js": "^0.2.1",
         "express": "^4.17.1",
         "ringcentral-chatbot-core": "^1.0.11",
